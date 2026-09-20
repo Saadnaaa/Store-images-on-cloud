@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Cloud Memories</title>
+  <rect width="64" height="64" rx="14" fill="#0f766e"/>
+  <path d="M18 43h28a9 9 0 0 0 1-18 14 14 0 0 0-26-2A10 10 0 0 0 18 43Z" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 31v12m0 0-5-5m5 5 5-5" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

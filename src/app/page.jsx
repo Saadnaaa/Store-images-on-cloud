@@ -1,7 +1,39 @@
 import Navbar from "@/components/Navbar";
 import HomeContent from "@/components/HomeContent";
+import { connectToDatabase } from "@/lib/mongodb";
+import User from "@/models/User";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function HomePage() {
+async function requireUser() {
+  try {
+    const token = (await cookies()).get("jwt")?.value;
+
+    if (!token) {
+      redirect("/login");
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    await connectToDatabase();
+
+    const user = await User.findById(decoded.userId).select("_id");
+
+    if (!user) {
+      redirect("/login");
+    }
+  } catch (error) {
+    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+
+    redirect("/login");
+  }
+}
+
+export default async function HomePage() {
+  await requireUser();
+
   return (
     <div className="min-h-screen bg-base-200/50 flex flex-col">
       <Navbar />
